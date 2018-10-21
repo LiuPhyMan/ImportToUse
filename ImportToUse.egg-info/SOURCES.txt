@@ -1,0 +1,8 @@
+README.md
+setup.py
+BetterQWidgets/__init__.py
+BetterQWidgets/_widgets.py
+ImportToUse.egg-info/PKG-INFO
+ImportToUse.egg-info/SOURCES.txt
+ImportToUse.egg-info/dependency_links.txt
+ImportToUse.egg-info/top_level.txt
