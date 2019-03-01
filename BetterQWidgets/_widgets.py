@@ -130,6 +130,44 @@ class QPlot(QW.QWidget):
 
 
 class SciQDoubleSpinBox(QW.QWidget):
+    valueChanged = pyqtSignal()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self._number = BetterQDoubleSpinBox()
+        self._node = QW.QComboBox()
+        self._node_dict = dict()
+        for i, _ in enumerate(['1E+04', '1E+03', '1E+02', '1E+01', '1E+00', '1E-01', '1E-02']):
+            self._node.addItem(_)
+            self._node_dict[_] = i
+        self._node.setFont(_DEFAULT_FONT)
+        self._set_layout()
+        self._set_slot()
+        self.setValue(0.0)
+
+    def _set_layout(self):
+        _layout = QW.QHBoxLayout()
+        _layout.addWidget(self._number)
+        _layout.addWidget(self._node)
+        _layout.addStretch(1)
+        self.setLayout(_layout)
+
+    def value(self):
+        value = self._number.value() * float(self._node.currentText())
+        return value
+
+    def setValue(self, value):
+        sci_str = '{v:.2e}'.format(v=value)
+        _number, _node = sci_str.split('e')
+        print(_node)
+        self._number.setValue(float(_number))
+        assert '1E' + _node in self._node_dict
+        _current_index = self._node_dict['1E' + _node]
+        self._node.setCurrentIndex(_current_index)
+
+    def _set_slot(self):
+        def slot_emit():
+            self.valueChanged.emit()
+
+        self._number.valueChanged.connect(slot_emit)
+        self._node.currentIndexChanged.connect(slot_emit)

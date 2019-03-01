@@ -15,6 +15,7 @@ from ._widgets import (BetterQLabel,
                        BetterQPushButton,
                        BetterQRadioButton,
                        ReadFileQWidget,
+                       SciQDoubleSpinBox,
                        QPlot)
 
 from numpy.testing import Tester

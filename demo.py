@@ -14,7 +14,8 @@ import sys
 from BetterQWidgets import (BetterQCheckBox,
                             BetterQDoubleSpinBox,
                             BetterQLabel,
-                            BetterQPushButton, BetterQRadioButton)
+                            BetterQPushButton, BetterQRadioButton,
+                            SciQDoubleSpinBox)
 
 
 class Temp(QW.QMainWindow):
@@ -37,6 +38,8 @@ class Temp(QW.QMainWindow):
         # qbutton.setStyleSheet("background-color:rgb(230,230,230)")
         _layout.addWidget(qbutton)
         _layout.addWidget(BetterQRadioButton())
+        self._scibox = SciQDoubleSpinBox()
+        _layout.addWidget(self._scibox)
         _layout.addStretch(1)
 
         self.cenWidget.setLayout(_layout)
