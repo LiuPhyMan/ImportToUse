@@ -9,6 +9,8 @@ Created on  15:56 2019/3/14
 @IDE:       PyCharm
 """
 
+from . import constants
+
 
 class tracer:
     def __init__(self, func):
