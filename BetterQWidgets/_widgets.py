@@ -60,10 +60,10 @@ class BetterQCheckBox(QW.QCheckBox):
 
 class ReadFileQWidget(QW.QWidget):
     pathChanged = pyqtSignal()
+    toReadFile = pyqtSignal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.path = ""
         self._label = BetterQLabel('FileDir')
         self._entry = QW.QLineEdit()
         self._entry.setEnabled(True)
@@ -71,16 +71,20 @@ class ReadFileQWidget(QW.QWidget):
         self._entry.setCursor(QCursor(Qt.IBeamCursor))
         self._entry.setFont(QFont("Ubuntu", 12))
         self._browse = BetterQPushButton("BROWSE")
-        self._browse.setCursor(QCursor(Qt.PointingHandCursor))
+        self._read_button = BetterQPushButton("READ")
         self._set_layout()
         self._set_connect()
         self._set_slot()
+
+    def path(self):
+        return self._entry.text()
 
     def _set_layout(self):
         _layout = QW.QHBoxLayout()
         _layout.addWidget(self._label)
         _layout.addWidget(self._entry)
         _layout.addWidget(self._browse)
+        _layout.addWidget(self._read_button)
         _layout.addStretch(1)
         self.setLayout(_layout)
 
@@ -97,10 +101,9 @@ class ReadFileQWidget(QW.QWidget):
 
     def _set_slot(self):
         def slot_emit():
-            print('emit')
-            self.pathChanged.emit()
+            self.toReadFile.emit()
 
-        self._entry.textChanged.connect(slot_emit)
+        self._read_button.clicked.connect(slot_emit)
 
 
 class PlotCanvas(FigureCanvas):
