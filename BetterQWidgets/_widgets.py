@@ -16,7 +16,7 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5 import NavigationToolbar2QT as NavigationToolbar
 
-_DEFAULT_FONT = QFont("Ubuntu", 10)
+_DEFAULT_FONT = QFont("Helvetica", 10)
 
 
 class BetterQPushButton(QW.QPushButton):
@@ -59,7 +59,6 @@ class BetterQCheckBox(QW.QCheckBox):
 
 
 class ReadFileQWidget(QW.QWidget):
-    pathChanged = pyqtSignal()
     toReadFile = pyqtSignal()
 
     def __init__(self, parent=None):
