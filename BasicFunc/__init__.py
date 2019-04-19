@@ -10,6 +10,7 @@ Created on  15:56 2019/3/14
 """
 
 from . import constants
+import numpy as _np
 
 
 class tracer:
@@ -21,3 +22,8 @@ class tracer:
         self.calls += 1
         print("called : {n:.0f} numbers".format(n=self.calls))
         return self.func(*args, **kwargs)
+
+
+def normal_gaussian(x, x0, fwhm):
+    return _np.sqrt(4 * _np.log(2) / _np.pi) / fwhm * _np.exp(
+        -4 * _np.log(2) * (x - x0) ** 2 / fwhm ** 2)
